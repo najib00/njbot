@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150624154715) do
+ActiveRecord::Schema.define(version: 20150624174822) do
+
+  create_table "data", force: :cascade do |t|
+    t.text     "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "updates", force: :cascade do |t|
     t.integer  "update_id"

@@ -1,6 +1,8 @@
+require 'rest_client'
 class UpdatesController < ApplicationController
   before_action :set_update, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+  TELEGRAM_BOT_URL = "https://api.telegram.org/bot117177519:AAGI170CuXJV8quNcVfHhBoK2b1NLIOulFc/"
   # GET /updates
   # GET /updates.json
   def index
@@ -28,6 +30,9 @@ class UpdatesController < ApplicationController
 
     respond_to do |format|
       if @update.save
+        mess = eval(@update.message)
+        return_message = { "chat_id":mess["chat"]["id"], "text":"apa itu #{mess["chat"]["text"]}? apakah bisa dimakan?"}
+        RestClient.post "#{TELEGRAM_BOT_URL}sendMessage", return_message
         format.html { redirect_to @update, notice: 'Update was successfully created.' }
         format.json { render :show, status: :created, location: @update }
       else
