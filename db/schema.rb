@@ -20,6 +20,6 @@ ActiveRecord::Schema.define(version: 20150624154715) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "updates", ["update_id"], name: "index_updates_on_update_id", unique: true
+  add_index "updates", ["update_id"], name: "index_updates_on_update_id"
 
 end
