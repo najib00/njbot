@@ -6,6 +6,6 @@ class CreateUpdates < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :updates, :update_id, unique: true
+    add_index :updates, :update_id
   end
 end
