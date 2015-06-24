@@ -1,6 +1,6 @@
 class UpdatesController < ApplicationController
   before_action :set_update, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   # GET /updates
   # GET /updates.json
   def index
@@ -69,6 +69,8 @@ class UpdatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def update_params
-      params.require(:update).permit(:update_id, :message)
+      pa = {'update_id':params[:update_id]}
+      pa["message"]=params[:message].to_s
+      pa
     end
 end
